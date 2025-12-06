@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GejCube.pl - Rangi Premium</title>
+    <style>
+        :root {
+            --primary-accent: #ff9900; 
+            --secondary-accent: #ffcc66; 
+            --text-main: #e0e0e0; 
+            --background-dark: #121212; 
+            --card-background: #1e1e1e; 
+            --hover-glow: rgba(255, 153, 0, 0.7);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        strong {
+            color: var(--secondary-accent);
+            font-weight: 700;
+        }
+        
+        .header {
+            background: var(--background-dark);
+            color: var(--text-main);
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border-bottom: 3px solid var(--primary-accent);
+        }
+
+        /* NOWY STYL DLA H1 Z ANIMACJĄ */
+        .header h1 {
+            margin: 0;
+            font-size: 3.5em;
+            letter-spacing: 5px;
+            color: var(--primary-accent); /* Ustawienie koloru tekstu na pomarańczowy */
+            text-shadow: 0 0 10px var(--primary-accent), 0 0 20px rgba(255, 153, 0, 0.5);
+            animation: pulse-glow 2s infinite alternate; /* Dodanie animacji */
+        }
+
+        .header p {
+            margin-top: 10px;
+            font-size: 1.4em;
+            font-weight: 300;
+        }
+        /* KONIEC NOWEGO STYLU DLA H1 */
+
+        .store-container {
+            max-width: 1300px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .rank-card {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            border: 1px solid #333;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+        
+        .rank-card:hover {
+            transform: translateY(-12px) scale(1.04); 
+            border-color: var(--primary-accent); 
+            box-shadow: 0 0 25px var(--hover-glow), 0 15px 30px rgba(0, 0, 0, 0.8); 
+        }
+
+        .rank-card h2 {
+            font-size: 2.5em;
+            margin-top: 0;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            color: var(--secondary-accent);
+            position: relative;
+            text-transform: uppercase;
+        }
+        
+        .rank-card h2::after {
+            content: '';
+            display: block;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-accent), transparent);
+            margin: 10px auto 0;
+        }
+        
+        .price {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: var(--primary-accent);
+            margin: 15px 0 30px 0;
+            display: block; 
+            text-shadow: 0 0 8px rgba(255, 153, 0, 0.5);
+        }
+
+        .rank-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .rank-card ul li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #333;
+            font-size: 1.05em;
+            transition: background-color 0.3s;
+        }
+        
+        .rank-card ul li:hover {
+            background-color: #222;
+        }
+        
+        .rank-card ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .privilege-icon {
+            color: var(--secondary-accent);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .privilege-inherited {
+            color: #888; 
+            font-style: italic;
+        }
+        
+        /* Domyślny styl info Discord (dla standardowych rang) */
+        .discord-info {
+            display: block;
+            background-color: #5865F2; /* Discord Blue */
+            color: #fff;
+            padding: 12px;
+            margin: 15px -30px -30px; /* Rozciąga się do krawędzi karty */
+            border-radius: 0 0 15px 15px;
+            font-size: 0.95em;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        /* Nadpisanie stylu dla OP karty */
+        .op-card-style .discord-info {
+            background-color: #00cccc; 
+            color: #121212;
+        }
+        /* Styl dla GEJCIAK */
+        .gejciak-card-style .discord-info {
+            background-color: #ff0000;
+            color: #fff;
+        }
+
+        .buy-button {
+            display: inline-block;
+            background: linear-gradient(145deg, #ffb84d, #ff8c00);
+            color: var(--background-dark);
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.4em;
+            margin-top: 35px;
+            transition: all 0.3s ease; 
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #cc7a00; 
+            text-transform: uppercase;
+        }
+
+        .buy-button:hover {
+            background: linear-gradient(145deg, #ff8c00, #ffb84d);
+            transform: translateY(4px) scale(1.02); 
+            box-shadow: 0 4px 0 #cc7a00;
+        }
+
+        .policy-section {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 40px;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            border: 1px solid #333;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .policy-section h2 {
+            color: var(--primary-accent);
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--primary-accent);
+            padding-bottom: 10px;
+        }
+
+        .policy-section ol, .policy-section ul {
+            padding-left: 25px;
+            list-style-type: decimal;
+        }
+        
+        .policy-section ul {
+            list-style-type: disc;
+        }
+
+        .policy-section li {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        
+        .policy-section strong.danger {
+            color: #ff4444;
+        }
+        
+        .policy-contact-highlight {
+            color: #7289DA; 
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: #0d0d0d;
+            color: #555;
+            margin-top: 80px;
+            font-size: 1em;
+            border-top: 3px solid var(--primary-accent);
+        }
+
+        /* ANIMACJE */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse-glow {
+            from {
+                text-shadow: 0 0 10px var(--primary-accent), 0 0 20px rgba(255, 153, 0, 0.5);
+            }
+            to {
+                text-shadow: 0 0 15px var(--primary-accent), 0 0 30px rgba(255, 153, 0, 0.8), 0 0 40px rgba(255, 153, 0, 0.3);
+            }
+        }
+        
+        /* STYLE DLA OP (CYJAN) */
+        .op-card-style {
+            border: 3px solid #00ffff !important; 
+            box-shadow: 0 0 35px rgba(0, 255, 255, 0.8) !important;
+        }
+        .op-card-style:hover {
+            box-shadow: 0 0 45px rgba(0, 255, 255, 1), 0 15px 30px rgba(0, 0, 0, 0.8) !important;
+        }
+        .op-card-style h2 {
+            color: #00ffff !important;
+            text-shadow: 0 0 8px #00ffff;
+        }
+        .op-card-style .price {
+            color: #00ffff !important;
+            text-shadow: 0 0 12px #00ffff;
+        }
+        .op-card-style .privilege-icon {
+            color: #00ffff !important;
+        }
+        .op-card-style .buy-button {
+            background: linear-gradient(145deg, #00ffff, #00cccc) !important;
+            box-shadow: 0 8px 0 #009999 !important;
+        }
+        .op-card-style .buy-button:hover {
+            background: linear-gradient(145deg, #00cccc, #00ffff) !important;
+            box-shadow: 0 4px 0 #009999 !important;
+        }
+        
+        /* STYLE DLA GEJCIAK (JASNY CZERWONY) */
+        .gejciak-card-style {
+             border: 3px solid #ff0000 !important; 
+             box-shadow: 0 0 35px rgba(255, 0, 0, 0.9) !important;
+        }
+        .gejciak-card-style h2 {
+            color: #ff0000 !important; 
+            text-shadow: 0 0 10px #ff0000;
+        }
+        .gejciak-card-style .price {
+            color: #ff0000 !important; 
+            text-shadow: 0 0 12px #ff0000;
+        }
+        .gejciak-card-style .buy-button {
+            background: linear-gradient(145deg, #ff0000, #ff8080) !important; 
+            box-shadow: 0 8px 0 #cc0000 !important;
+        }
+        .gejciak-card-style .buy-button:hover {
+            background: linear-gradient(145deg, #ff8080, #ff0000) !important; 
+            box-shadow: 0 4px 0 #cc0000 !important;
+        }
+
+        /* STYLE DLA HEADADMIN (CIEMNY CZERWONY) */
+        .headadmin-card-style {
+            border: 3px solid #8b0000 !important; 
+            box-shadow: 0 0 35px rgba(139, 0, 0, 0.8) !important;
+        }
+        .headadmin-card-style h2, .headadmin-card-style .price {
+            color: #ff4444 !important;
+            text-shadow: 0 0 8px #ff4444;
+        }
+        .headadmin-card-style .privilege-icon {
+            color: #ff4444 !important;
+        }
+        .headadmin-card-style .buy-button {
+            background: linear-gradient(145deg, #cc0000, #8b0000) !important;
+            box-shadow: 0 8px 0 #550000 !important;
+        }
+        .headadmin-card-style .buy-button:hover {
+            background: linear-gradient(145deg, #8b0000, #cc0000) !important;
+            box-shadow: 0 4px 0 #550000 !important;
+        }
+        .headadmin-card-style .discord-info {
+            background-color: #8b0000;
+            color: #fff;
+        }
+
+        /* STYLE DLA ADMIN (JASNY CZERWONY/ŁOSOSIOWY) */
+        .admin-card-style {
+            border: 3px solid #ff4d4d !important; 
+            box-shadow: 0 0 35px rgba(255, 77, 77, 0.8) !important;
+        }
+        .admin-card-style h2, .admin-card-style .price {
+            color: #ff8080 !important;
+            text-shadow: 0 0 8px #ff8080;
+        }
+        .admin-card-style .privilege-icon {
+            color: #ff8080 !important;
+        }
+        .admin-card-style .buy-button {
+            background: linear-gradient(145deg, #ff8080, #ff4d4d) !important;
+            box-shadow: 0 8px 0 #cc3333 !important;
+        }
+        .admin-card-style .buy-button:hover {
+            background: linear-gradient(145deg, #ff4d4d, #ff8080) !important;
+            box-shadow: 0 4px 0 #cc3333 !important;
+        }
+        .admin-card-style .discord-info {
+            background-color: #ff4d4d;
+            color: #121212;
+        }
+
+
+        /* STYLE DLA MODERATOR (ZIELONY) */
+        .moderator-card-style {
+            border: 3px solid #00cc00 !important; 
+            box-shadow: 0 0 35px rgba(0, 204, 0, 0.8) !important;
+        }
+        .moderator-card-style h2, .moderator-card-style .price {
+            color: #66ff66 !important;
+            text-shadow: 0 0 8px #66ff66;
+        }
+        .moderator-card-style .privilege-icon {
+            color: #66ff66 !important;
+        }
+        .moderator-card-style .buy-button {
+            background: linear-gradient(145deg, #33cc33, #00cc00) !important;
+            box-shadow: 0 8px 0 #008000 !important;
+        }
+        .moderator-card-style .buy-button:hover {
+            background: linear-gradient(145deg, #00cc00, #33cc33) !important;
+            box-shadow: 0 4px 0 #008000 !important;
+        }
+        .moderator-card-style .discord-info {
+            background-color: #00cc00;
+            color: #121212;
+        }
+
+        /* STYLE DLA HELPER (NIEBIESKI) */
+        .helper-card-style {
+            border: 33x solid #0000ff !important; 
+            box-shadow: 0 0 35px rgba(0, 0, 255, 0.8) !important;
+        }
+        .helper-card-style h2, .helper-card-style .price {
+            color: #4d94ff !important;
+            text-shadow: 0 0 8px #4d94ff;
+        }
+        .helper-card-style .privilege-icon {
+            color: #4d94ff !important;
+        }
+        .helper-card-style .buy-button {
+            background: linear-gradient(145deg, #4d94ff, #0000ff) !important;
+            box-shadow: 0 8px 0 #000099 !important;
+        }
+        .helper-card-style .buy-button:hover {
+            background: linear-gradient(145deg, #0000ff, #4d94ff) !important;
+            box-shadow: 0 4px 0 #000099 !important;
+        }
+        .helper-card-style .discord-info {
+            background-color: #0000ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>GEJCUBE.PL</h1>
+        <p>Prestiż, Przywileje, Pełna Kontrola. Wybierz swoją drogę.</p>
+    </header>
+
+    <div class="store-container">
+        
+        <div class="rank-card op-card-style" style="--i: 1;">
+            <h2>OP</h2>
+            <span class="price">70 zł</span>
+            <p class="highlight"><strong>Status Legendy.</strong> Obejmuje wszystkie funkcje Admina i HeadAdmina.</p>
+            <ul>
+                <li class="privilege-inherited">Zawiera wszystkie funkcje HeadAdmina i <strong>Admina</strong></li>
+                <li><span class="privilege-icon">»</span> <strong>Pełen dostęp</strong> do serwera (równoważny z /op)</li>
+                <li><span class="privilege-icon">»</span> Komendy do <strong>zmiany świata i czasu</strong></li>
+                <li><span class="privilege-icon">»</span> Możliwość bycia <strong>niewidzialnym</strong> dla innych graczy</li>
+                <li><span class="privilege-icon">»</span> Dedykowany, prywatny <strong>kontakt z Właścicielem</strong> serwera</li>
+                <li><span class="privilege-icon">»</span> <strong>Najwyższy priorytet</strong> we wsparciu technicznym</li>
+            </ul>
+            <a href="TWÓJ_LINK_DO_KUPNA_OP" target="_blank" class="buy-button">KUP RANGĘ</a>
+            <span class="discord-info">SKONTAKTUJ SIĘ NA DISCORD PO ZAKUPIE!</span>
+        </div>
+
+        <div class="rank-card gejciak-card-style" style="--i: 2;">
+            <h2>GEJCIAK</h2>
+            <span class="price">60 zł</span>
+            <p class="highlight" style="font-size: 1.1em; color: #ff0000;"><strong>ABSOLUTNA MOC!</strong> Obejmuje wszystkie funkcje HeadAdmina i Admina.</p>
+            <ul>
+                <li class="privilege-inherited">Zawiera wszystkie funkcje HeadAdmina i <strong>Admina</strong></li>
+                <li><span class="privilege-icon">»</span> <strong>Nieograniczony dostęp</strong> do komend i funkcji serwera</li>
+                <li><span class="privilege-icon">»</span> <strong>Ekskluzywny tag [GEJCIAK]</strong> z dynamicznym efektem wizualnym</li>
+                <li><span class="privilege-icon">»</span> <strong>Wieczna Ochrona</strong> konta przed jakimikolwiek karami administracyjnymi</li>
+                <li><span class="privilege-icon">»</span> Indywidualny <strong>specjalny kanał</strong> na Discordzie tylko dla GEJCIAKÓW</li>
+                <li><span class="privilege-icon">»</span> Dostęp do <strong>wszystkich przyszłych</strong> płatnych funkcji i rang</li>
+            </ul>
+            <a href="TWÓJ_LINK_DO_KUPNA_GEJCIAKA" target="_blank" class="buy-button">KUP RANGĘ</a>
+            <span class="discord-info">SKONTAKTUJ SIĘ NA DISCORD PO ZAKUPIE!</span>
+        </div>
+        
+        <div class="rank-card headadmin-card-style" style="--i: 3;">
+            <h2>HEADADMIN</h2>
+            <span class="price">50 zł</span>
+            <p><strong>Władza Absolutna.</strong> Obejmuje wszystkie funkcje Admina i Moderatora.</p>
+            <ul>
+                <li class="privilege-inherited">Zawiera wszystkie funkcje Admina i <strong>Moderatora</strong></li>
+                <li><span class="privilege-icon">»</span> Możliwość <strong>tymczasowego nadawania</strong> rang Helper i Moderator</li>
+                <li><span class="privilege-icon">»</span> Pełna kontrola nad mechaniką serwera (np. <strong>`/gamerule`</strong>)</li>
+                <li><span class="privilege-icon">»</span> <strong>Ekskluzywny tag [BOSS]</strong> z pulsującym efektem wizualnym</li>
+                <li><span class="privilege-icon">»</span> Stały dostęp do <strong>Creative Mode</strong> na chronionych terenach</li>
+                <li><span class="privilege-icon">»</span> Dedykowany, prywatny kanał komunikacji z Właścicielem</li>
+            </ul>
+            <a href="TWÓJ_LINK_DO_KUPNA_HEADADMINA" target="_blank" class="buy-button">KUP RANGĘ</a>
+            <span class="discord-info">SKONTAKTUJ SIĘ NA DISCORD PO ZAKUPIE!</span>
+        </div>
+        
+        <div class="rank-card admin-card-style" style="--i: 4;">
+            <h2>ADMIN</h2>
+            <span class="price">40 zł</span>
+            <p><strong>Zaawansowana Kontrola.</strong> Obejmuje wszystkie funkcje Moderatora i Helpera.</p>
+            <ul>
+                <li class="privilege-inherited">Zawiera wszystkie funkcje Moderatora i <strong>Helpera</strong></li>
+                <li><span class="privilege-icon">»</span> Komenda <strong>`/vanish`</strong> (Pełna niewidzialność dla wszystkich graczy)</li>
+                <li><span class="privilege-icon">»</span> Komenda <strong>`/check`</strong> (Inspekcja podejrzanych graczy)</li>
+                <li><span class="privilege-icon">»</span> Dostęp do <strong>Spectator Mode</strong> (`/spectate`)</li>
+                <li><span class="privilege-icon">»</span> Możliwość zmiany trybu gry <strong>`/gamemode`</strong></li>
+                <li><span class="privilege-icon">»</span> Dostęp do <strong>Spectator Mode</strong> (`/spectate`)</li>
+            </ul>
+            <a href="TWÓJ_LINK_DO_KUPNA_ADMINA" target="_blank" class="buy-button">KUP RANGĘ</a>
+            <span class="discord-info">SKONTAKTUJ SIĘ NA DISCORD PO ZAKUPIE!</span>
+        </div>
+
+        <div class="rank-card moderator-card-style" style="--i: 5;">
+            <h2>MODERATOR</h2>
+            <span class="price">30 zł</span>
+            <p><strong>Pełny Wpływ.</strong> Obejmuje wszystkie funkcje Helpera.</p>
+            <ul>
+                <li class="privilege-inherited">Zawiera wszystkie funkcje Helpera</li>
+                <li><span class="privilege-icon">»</span> Komendy permanentnej blokady <strong>`/ban`</strong> i czasowej <strong>`/tempban`</strong></li>
+                <li><span class="privilege-icon">»</span> Komenda <strong>`/fly`</strong> (Nieograniczony lot)</li>
+                <li><span class="privilege-icon">»</span> Dostęp do komendy <strong>`/setspawn`</strong> i <strong>`/setwarp`</strong></li>
+                <li><span class="privilege-icon">»</span> Podgląd ekwipunku graczy <strong>`/invsee`</strong> oraz <strong>`/enderchest`</strong></li>
+                <li><span class="privilege-icon">»</span> Możliwość tworzenia większej ilości sethome/warp</li>
+            </ul>
+            <a href="TWÓJ_LINK_DO_KUPNA_MODERATORA" target="_blank" class="buy-button">KUP RANGĘ</a>
+            <span class="discord-info">SKONTAKTUJ SIĘ NA DISCORD PO ZAKUPIE!</span>
+        </div>
+
+        <div class="rank-card helper-card-style" style="--i: 6;">
+            <h2>HELPER</h2>
+            <span class="price">29 zł</span>
+            <p><strong>Wsparcie Społeczności.</strong> Zostań częścią naszej ekipy!</p>
+            <ul>
+                <li><span class="privilege-icon">»</span> Dostęp do kluczowych komend <strong>`/mute`</strong> i <strong>`/kick`</strong></li>
+                <li><span class="privilege-icon">»</span> Unikalny, widoczny <strong>kolorowy prefiks</strong> w grze</li>
+                <li><span class="privilege-icon">»</span> Komenda <strong>`/seen`</strong> (sprawdzanie statusu graczy)</li>
+                <li><span class="privilege-icon">»</span> <strong>Priorytetowy slot</strong> wejścia, omijający pełny serwer</li>
+                <li><span class="privilege-icon">»</span> Zwiększony limit na warp i home</li>
+            </ul>
+            <a href="TWÓJ_LINK_DO_KUPNA_HELPERA" target="_blank" class="buy-button">KUP RANGĘ</a>
+            <span class="discord-info">SKONTAKTUJ SIĘ NA DISCORD PO ZAKUPIE!</span>
+        </div>
+
+    </div>
+    
+    <section class="policy-section">
+        <h2>REGULAMIN PŁATNOŚCI I ZAKUPÓW GEJCUBE.PL</h2>
+        
+        <ol>
+            <li>
+                <strong>Informacje Ogólne</strong>
+                <ul>
+                    <li>Sklep internetowy GEJCUBE.PL oferuje wirtualne usługi cyfrowe (rangi, ulepszenia) do wykorzystania na serwerze Minecraft GEJCUBE.PL.</li>
+                    <li>Ceny podane w Sklepie są cenami brutto.</li>
+                    <li>Sklep prowadzony jest przez osobę fizyczną i <strong>nie jest zarejestrowaną działalnością gospodarczą</strong> (firmą).</li>
+                    <li>Kontakt ze Sklepem (Właściciel): <span class="policy-contact-highlight">Discord: 0aza</span>.</li>
+                    <li>Adres serwera Discord: <a href="https://dc.gg/gejcube.pl" target="_blank" style="color: #7289DA;">dc.gg/gejcube.pl</a>.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Składanie Zamówienia i Realizacja Usługi</strong>
+                <p><strong>WAŻNE!</strong> Ranga nie zostanie nadana automatycznie. Po złożeniu Zamówienia, Klient jest zobowiązany do podjęcia następujących kroków:</p>
+                <ul>
+                    <li>Wypełnić Formularz Zamówienia (w tym podać <strong>poprawny Nick Minecraft</strong>).</li>
+                    <li>Opłacić zamówienie wybraną metodą.</li>
+                    <li><strong>NATYCHMIASTOWY KONTAKT:</strong> W celu finalizacji, należy otworzyć Ticket na naszym Discordzie (<a href="https://dc.gg/gejcube.pl" target="_blank" style="color: #7289DA;">dc.gg/gejcube.pl</a>) lub skontaktować się bezpośrednio z Właścicielem <span class="policy-contact-highlight">Discord: 0aza</span>.</li>
+                    <li>Do wiadomości należy dołączyć potwierdzenie płatności.</li>
+                    <li>Ranga zostanie przypisana do konta gracza po weryfikacji płatności przez Właściciela w terminie do 24 godzin od momentu zgłoszenia na Discordzie. Bez kontaktu i potwierdzenia płatności ranga nie zostanie nadana.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Metody Płatności</strong>
+                <ul>
+                    <li>Klient może skorzystać z następujących, szybkich metod płatności:
+                        <ul>
+                            <li>BLIK</li>
+                            <li>Karta Płatnicza (Visa, Mastercard)</li>
+                            <li>Apple Pay</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <strong>Brak Prawa do Zwrotu (BRAK REFUNDACJI RANG)</strong>
+                <ul>
+                    <li>Klient, kupując Produkt Cyfrowy (rangę w grze Minecraft), zgadza się na jego <strong>natychmiastowe dostarczenie</strong> na konto.</li>
+                    <li>W związku z tym, po zakupie i dostarczeniu, <strong>Klient traci prawo do odstąpienia od umowy i zwrotu pieniędzy</strong>.</li>
+                    <li>Zakupione rangi <strong>nie podlegają zwrotom</strong> ani wymianie na inne usługi.</li>
+                </ul>
+            </li>
+            <li>
+                <h3 style="color: var(--primary-accent); margin-top: 0;">Obowiązki i Konsekwencje Korzystania z Rang Premium</h3>
+                <p>Kupując rangę Premium (w tym OP), akceptujesz poniższe zasady. Ranga to <strong>przywilej, nie prawo</strong> do łamania regulaminu serwera. W razie wątpliwości – zawsze pytaj właściciela o zgodę.</p>
+                
+                <h4 style="color: var(--secondary-accent); margin: 20px 0 10px 0;">ZASADY ZABRONIONE (Dotyczy komend administracyjnych/stafferskich):</h4>
+                <ul>
+                    <li><strong class="danger">Osobiste Korzyści:</strong> Branie itemów z komend administracyjnych (/give, tryb kreatywny itp.) w celu osobistego użytku lub rozdawania innym graczom (faworyzowanie).</li>
+                    <li><strong class="danger">Nadużycie:</strong> Nadużywanie permisji w sposób psujący rozgrywkę, w tym używanie komend do griefowania, przeszkadzania lub irytowania innych.</li>
+                    <li><strong class="danger">Moderacja:</strong> Banowanie / mutowanie graczy, rozdawanie kluczy, teleportowanie graczy bez ich zgody, lub sprawdzanie graczy (komendy /invsee, /tp, /check) <strong>bez wiedzy i zgody właściciela</strong>.</li>
+                    <li><strong class="danger">Oszukiwanie:</strong> Cheatowanie, używanie niedozwolonych modyfikacji, a także teleportowanie się do graczy w celu poznania ich koordynatów lub baz.</li>
+                </ul>
+
+                <h4 style="color: var(--primary-accent); margin: 20px 0 10px 0;">KONIECZNE KONSEKWENCJE:</h4>
+                <p>W przypadku złamania powyższych zasad:</p>
+                <ul>
+                    <li><strong class="danger">DEGRADACJA:</strong> Natychmiastowe odebranie rangi (degradacja) bez możliwości zwrotu kosztów zakupu.</li>
+                    <li><strong class="danger">BAN:</strong> W poważniejszych przypadkach (np. cheaty, celowe griefing) – ban stały na serwerze.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Postanowienia Końcowe</strong>
+                <ul>
+                    <li>Sklep GEJCUBE.PL nie jest powiązany z Mojang Studios ani Microsoft. Wszelkie prawa autorskie należą do ich właścicieli.</li>
+                    <li>Zakupione usługi są przeznaczone do wykorzystania <strong>wyłącznie na serwerze GEJCUBE.PL</strong>. Klient musi przestrzegać zasad serwera i Minecraft EULA.</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+
+    <footer class="footer">
+        &copy; 2025 GejCube.pl | Wszystkie transakcje wspierają rozwój serwera.
+    </footer>
+
+</body>
+</html>
