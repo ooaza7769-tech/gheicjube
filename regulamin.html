@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulamin Sklepu GejCube.pl</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-accent: #FF5722; /* Deep Orange */
+            --secondary-accent: #FFAB91; 
+            --text-main: #f0f0f0; 
+            --background-dark: #0f0f0f; 
+            --card-background: #1a1a1a; 
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-dark);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--card-background);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--border-color);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 3px solid var(--primary-accent);
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: var(--primary-accent);
+            text-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+            margin: 0;
+        }
+
+        h2 {
+            color: var(--secondary-accent);
+            font-size: 2em;
+            font-weight: 700;
+            margin-top: 40px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h3 {
+            color: var(--primary-accent);
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 25px;
+        }
+
+        p, li {
+            font-weight: 300;
+            color: #ccc;
+            font-size: 1.05em;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '•';
+            color: var(--primary-accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        strong {
+            color: var(--secondary-accent);
+            font-weight: 600;
+        }
+        
+        .contact-info {
+            background-color: var(--background-dark);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 5px solid var(--primary-accent);
+        }
+        
+        .contact-info p {
+            margin: 5px 0;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 25px;
+            background-color: var(--primary-accent);
+            color: var(--background-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #FF9800;
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="header">
+            <h1>Regulamin Sklepu GejCube.pl</h1>
+            <p>Obowiązuje od 15 grudnia 2025 r.</p>
+        </div>
+        
+        <a href="index.html" class="back-button">← Powrót do Sklepu</a>
+
+        <h2>1. Postanowienia Ogólne</h2>
+        <ul>
+            <li>Administratorem i właścicielem Sklepu jest <strong>[WPISZ TUTAJ DANE WŁAŚCICIELA/FIRMY]</strong>.</li>
+            <li>Regulamin określa zasady dokonywania zakupów i korzystania z usług dostępnych w Sklepie GejCube.pl.</li>
+            <li>Dokonując zakupu, Użytkownik akceptuje niniejszy Regulamin oraz zasady panujące na serwerze GejCube.pl.</li>
+            <li>Wszystkie usługi mają charakter wirtualny i są realizowane w świecie gry Minecraft.</li>
+            <li>Administrator zastrzega sobie prawo do zmiany Regulaminu. O zmianach Użytkownicy zostaną poinformowani na Discordzie lub stronie głównej serwera.</li>
+        </ul>
+
+        <h2>2. Płatności i Zakupy</h2>
+        <ul>
+            <li>Ceny usług i rang podane są w walucie polskiej (PLN) i są cenami brutto.</li>
+            <li>Płatności są realizowane poprzez systemy płatności online (np. Stripe, PayPal, Przelewy24).</li>
+            <li>Realizacja zamówienia następuje po zaksięgowaniu pełnej kwoty na koncie Administratora, co w przypadku szybkich płatności zwykle trwa kilka minut.</li>
+            <li>W przypadku problemów z płatnością, Użytkownik jest zobowiązany do natychmiastowego skontaktowania się z Administratorem.</li>
+            <li>Zakupy są dobrowolne i wspierają rozwój serwera. W przypadku zamknięcia serwera, Administrator nie ma obowiązku zwrotu środków.</li>
+        </ul>
+
+        <h2>3. Realizacja Usługi (Rangi Administracyjne)</h2>
+        <ul>
+            <li>Rangi Administracyjne (Helper, Moderator, Admin, HeadAdmin, Gejciak, OP) są nadawane <strong>wyłącznie po kontakcie z Właścicielem</strong> serwera na platformie Discord.</li>
+            <li>Po dokonaniu płatności, Użytkownik musi przedstawić dowód zakupu (np. potwierdzenie przelewu/transakcji) Właścicielowi na Discordzie.</li>
+            <li>Ranga jest nadawana na konto Minecraft podane przez Użytkownika. Zmiana konta po nadaniu rangi jest niemożliwa lub może wiązać się z dodatkowymi opłatami administracyjnymi.</li>
+            <li>Korzystanie z przywilejów rangi musi być zgodne z **etyką i zasadami serwera**. Nadużywanie uprawnień, oszukiwanie lub griefing skutkują <strong>natychmiastowym i bezzwrotnym usunięciem rangi</strong> oraz blokadą konta.</li>
+            <li>Właściciel zastrzega sobie prawo do weryfikacji Użytkownika przed nadaniem rangi, aby upewnić się, że spełnia on standardy administratora.</li>
+        </ul>
+
+        <h2>4. Reklamacje i Zwroty</h2>
+        <ul>
+            <li>Zgodnie z polskim prawem, usługi cyfrowe (takie jak ranga w grze) są bezzwrotne po ich aktywacji, jeśli Użytkownik wyraził zgodę na rozpoczęcie świadczenia usługi przed upływem 14-dniowego terminu odstąpienia od umowy. <strong>Nadanie rangi jest równoznaczne z rozpoczęciem świadczenia usługi.</strong></li>
+            <li>Reklamacja może dotyczyć wyłącznie **nieotrzymania zakupionej rangi** lub innej usługi, mimo poprawnie opłaconej transakcji.</li>
+            <li>Reklamację należy zgłosić do Administratora w terminie 7 dni od daty zakupu, załączając dowód wpłaty.</li>
+            <li>W przypadku pozytywnego rozpatrzenia reklamacji i niemożności nadania usługi, zwrot środków nastąpi w ciągu 14 dni roboczych.</li>
+            <li>Zwroty nie przysługują w przypadku nałożenia kary (ban, usunięcie rangi) z powodu naruszenia regulaminu serwera lub zasad korzystania z przywilejów administracyjnych.</li>
+        </ul>
+
+        <h2>5. Postanowienia Końcowe</h2>
+        <ul>
+            <li>W sprawach nieuregulowanych niniejszym Regulaminem zastosowanie mają przepisy prawa polskiego.</li>
+            <li>Wszelkie spory wynikające z realizacji transakcji w Sklepie będą rozstrzygane przez sąd właściwy dla siedziby Administratora.</li>
+        </ul>
+        
+        <div class="contact-info">
+            <h3>Kontakt z Właścicielem:</h3>
+            <p>Platforma: **Discord**</p>
+            <p>Nick: **[WPISZ TUTAJ SWÓJ NICK DISCORD]**</p>
+            <p>E-mail (Wsparcie): **[WPISZ TUTAJ E-MAIL]**</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
