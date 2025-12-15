@@ -7,12 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-accent: #FF5722; /* Deep Orange */
+            --primary-accent: #FF5722;
             --secondary-accent: #FFAB91; 
             --text-main: #f0f0f0; 
             --background-dark: #0f0f0f; 
             --card-background: #1a1a1a; 
             --border-color: #333;
+            --warning-color: #ffcc00; 
         }
 
         body {
@@ -125,6 +126,38 @@
             background-color: #FF9800;
             transform: translateY(-2px);
         }
+        
+        .admin-policy {
+            background-color: #2a1a1a;
+            border: 2px solid #b30000;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .admin-policy h3 {
+            color: #ff4d4d;
+            border-bottom: 2px dashed #b30000;
+            padding-bottom: 10px;
+        }
+
+        .admin-policy ul li::before {
+            content: '❌';
+            color: #ff4d4d;
+        }
+
+        .admin-policy .good-conduct li::before {
+            content: '✔️';
+            color: #00b300;
+        }
+        
+        .consequences {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #2b2b00;
+            border: 2px solid var(--warning-color);
+            border-radius: 8px;
+        }
 
     </style>
 </head>
@@ -141,7 +174,7 @@
 
         <h2>1. Postanowienia Ogólne</h2>
         <ul>
-            <li>Administratorem i właścicielem Sklepu jest <strong>[WPISZ TUTAJ DANE WŁAŚCICIELA/FIRMY]</strong>.</li>
+            <li>Administratorem i właścicielem Sklepu jest <strong>Dawid Oraf</strong>.</li>
             <li>Regulamin określa zasady dokonywania zakupów i korzystania z usług dostępnych w Sklepie GejCube.pl.</li>
             <li>Dokonując zakupu, Użytkownik akceptuje niniejszy Regulamin oraz zasady panujące na serwerze GejCube.pl.</li>
             <li>Wszystkie usługi mają charakter wirtualny i są realizowane w świecie gry Minecraft.</li>
@@ -157,22 +190,57 @@
             <li>Zakupy są dobrowolne i wspierają rozwój serwera. W przypadku zamknięcia serwera, Administrator nie ma obowiązku zwrotu środków.</li>
         </ul>
 
-        <h2>3. Realizacja Usługi (Rangi Administracyjne)</h2>
+        <h2>3. Realizacja Usługi i Regulamin Rangi Administracyjnej</h2>
+
+        <div class="admin-policy">
+            <h3>Regulamin rangi ADMINISTRACYJNEJ (OP, Gejciak, HeadAdmin, Admin, Moderator, Helper)</h3>
+            <p>Obowiązuje od momentu nadania rangi. Kupując rangę ADMINISTRACYJNĄ, kupujesz przywilej, a nie prawo do łamania zasad. Akceptujesz wszystkie poniższe zasady:</p>
+            
+            <h4>Zabrania się:</h4>
+            <ul>
+                <li>Brania itemów z komend administracyjnych (/give, /kit gej, tryb kreatywny itp.) w celu **osobistego użytku** lub rozdawania innym graczom.</li>
+                <li>**Banowania / mutowania graczy bez wiedzy i zgody właściciela** (chyba że jest to bezpośrednie i oczywiste złamanie regulaminu serwera).</li>
+                <li>Dawania **faworek** (przedmiotów lub korzyści) innym graczom.</li>
+                <li>**Cheatowania** lub używania niedozwolonych modyfikacji (np. xray, fly hack, clicker).</li>
+                <li>**Nadużywania komend** w sposób psujący rozgrywkę lub wywołujący chaos.</li>
+                <li>Rozdawania kluczy lub innych płatnych elementów serwera **bez zgody właściciela**.</li>
+                <li>Teleportowania graczy do siebie lub do innych graczy **bez ich zgody**.</li>
+                <li>Teleportowania się do graczy w celu poznania ich koordynatów (szpiegowanie).</li>
+                <li>**Sprawdzania graczy bez zgody właściciela** (dotyczy również komend typu /invsee, /enderchest, /tp, itp.).</li>
+            </ul>
+
+            <h4>Zasady Dobrego Zachowania (Obowiązki Administracyjne):</h4>
+            <ul class="good-conduct">
+                <li>Szanuj innych graczy – ranga administracyjna to **przywilej, a nie zabawka**.</li>
+                <li>W razie wątpliwości lub nietypowej sytuacji – **zawsze pytaj właściciela o zgodę**.</li>
+                <li>Pamiętaj, że ranga to **odpowiedzialność** i zobowiązanie do utrzymania porządku, a nie tylko komendy.</li>
+            </ul>
+
+            <div class="consequences">
+                <h3>⚠ Konsekwencje i Zwroty:</h3>
+                <ul>
+                    <li>**Natychmiastowe odebranie rangi** bez zwrotu kosztów za złamanie powyższych zasad.</li>
+                    <li>W poważniejszych przypadkach, w zależności od przewinienia – **ban stały** na serwerze.</li>
+                    <li>**Nie przyjmujemy zwrotów** pieniędzy po straceniu rangi z powodu naruszenia niniejszego Regulaminu.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <p>Pozostałe zasady realizacji usługi:</p>
         <ul>
-            <li>Rangi Administracyjne (Helper, Moderator, Admin, HeadAdmin, Gejciak, OP) są nadawane <strong>wyłącznie po kontakcie z Właścicielem</strong> serwera na platformie Discord.</li>
-            <li>Po dokonaniu płatności, Użytkownik musi przedstawić dowód zakupu (np. potwierdzenie przelewu/transakcji) Właścicielowi na Discordzie.</li>
+            <li>Rangi Administracyjne są nadawane **wyłącznie po kontakcie z Właścicielem** serwera na platformie Discord.</li>
+            <li>Po dokonaniu płatności, Użytkownik musi przedstawić dowód zakupu (np. potwierdzenie transakcji) Właścicielowi na Discordzie.</li>
             <li>Ranga jest nadawana na konto Minecraft podane przez Użytkownika. Zmiana konta po nadaniu rangi jest niemożliwa lub może wiązać się z dodatkowymi opłatami administracyjnymi.</li>
-            <li>Korzystanie z przywilejów rangi musi być zgodne z **etyką i zasadami serwera**. Nadużywanie uprawnień, oszukiwanie lub griefing skutkują <strong>natychmiastowym i bezzwrotnym usunięciem rangi</strong> oraz blokadą konta.</li>
             <li>Właściciel zastrzega sobie prawo do weryfikacji Użytkownika przed nadaniem rangi, aby upewnić się, że spełnia on standardy administratora.</li>
         </ul>
 
         <h2>4. Reklamacje i Zwroty</h2>
         <ul>
-            <li>Zgodnie z polskim prawem, usługi cyfrowe (takie jak ranga w grze) są bezzwrotne po ich aktywacji, jeśli Użytkownik wyraził zgodę na rozpoczęcie świadczenia usługi przed upływem 14-dniowego terminu odstąpienia od umowy. <strong>Nadanie rangi jest równoznaczne z rozpoczęciem świadczenia usługi.</strong></li>
+            <li>Zgodnie z polskim prawem, usługi cyfrowe (takie jak ranga w grze) są bezzwrotne po ich aktywacji, jeśli Użytkownik wyraził zgodę na rozpoczęcie świadczenia usługi przed upływem 14-dniowego terminu odstąpienia od umowy. **Nadanie rangi jest równoznaczne z rozpoczęciem świadczenia usługi.**</li>
             <li>Reklamacja może dotyczyć wyłącznie **nieotrzymania zakupionej rangi** lub innej usługi, mimo poprawnie opłaconej transakcji.</li>
             <li>Reklamację należy zgłosić do Administratora w terminie 7 dni od daty zakupu, załączając dowód wpłaty.</li>
             <li>W przypadku pozytywnego rozpatrzenia reklamacji i niemożności nadania usługi, zwrot środków nastąpi w ciągu 14 dni roboczych.</li>
-            <li>Zwroty nie przysługują w przypadku nałożenia kary (ban, usunięcie rangi) z powodu naruszenia regulaminu serwera lub zasad korzystania z przywilejów administracyjnych.</li>
+            <li>**Zwroty nie przysługują w przypadku nałożenia kary (ban, usunięcie rangi) z powodu naruszenia regulaminu serwera lub zasad korzystania z przywilejów administracyjnych, co zostało zaznaczone w sekcji 3.**</li>
         </ul>
 
         <h2>5. Postanowienia Końcowe</h2>
@@ -184,11 +252,13 @@
         <div class="contact-info">
             <h3>Kontakt z Właścicielem:</h3>
             <p>Platforma: **Discord**</p>
-            <p>Nick: **[WPISZ TUTAJ SWÓJ NICK DISCORD]**</p>
-            <p>E-mail (Wsparcie): **[WPISZ TUTAJ E-MAIL]**</p>
+            <p>Nick: **0aza**</p>
         </div>
 
     </div>
 
 </body>
+</html>
+</body>
+
 </html>
